@@ -12,26 +12,33 @@ def cesar_cipher(text, key):
 
 def vigenere_cipher(text, key):
 
+    key = key.lower()
+    text = text.lower()
     list_of_key = []
     list_of_text = []
     list_of_A = []
     list_of_text_encrypted = []
+    len_text = 0
 
     # Pour la clé, on la transforme en liste de nombres ascii
     for char in key :
         key_numbers = ord(char)
         list_of_key.append(key_numbers)
         len_key = len(list_of_key)
-    
+
+    for s in text:
+        if s.isalpha():
+            len_text += 1
+    len_text_string = len(text)
     # pour le texte, on transforme en liste de nombres ascii
     for char in text :
 
         text_numbers = ord(char)
         list_of_text.append(text_numbers)
-        len_text = len(list_of_text)
     
     #Créé une liste de la taille du texte avec la clé de A répété
-    for i in range(len_text-1) :
+
+    for i in range(len_text) :
         list_of_A.append(ord('a'))
         
     if len_text < len_key :
@@ -41,7 +48,7 @@ def vigenere_cipher(text, key):
 
     elif len_text >= len_key :
 
-        while len(list_of_key) > len_text :
+        while len(list_of_key) < len_text :
 
             for j in range(len_key) :
                 list_of_key.append(list_of_key[j])
@@ -49,14 +56,22 @@ def vigenere_cipher(text, key):
                 if len(list_of_key) == len_text :
                     break
 
-    for j in range(len_text-1) :
+    for j in range(len_text) :
         list_of_key[j] -= list_of_A[j]
-        list_of_text[j] += list_of_key[j]
+    
+    for j in range(len_text) :
+        if list_of_text[j] < 97 or list_of_text[j] > 122 :
+            continue
+        else :
+            list_of_text[j] += list_of_key[j]
+        if list_of_text[j] > 122 :
+            list_of_text[j] = list_of_text[j] - 26
 
-    list_of_text_encrypted = chr(list_of_text)
+    for char in list_of_text :
+        letter_encrypted = chr(char)
+        list_of_text_encrypted.append(letter_encrypted)
     crypted_text = "".join(list_of_text_encrypted)
 
-                #faire avec modulo
 
 
     return crypted_text
