@@ -1,3 +1,5 @@
+import string
+
 def cesar_cipher(text, key, cipher = True):
 
     crypted_text = ""
@@ -13,12 +15,16 @@ def cesar_cipher(text, key, cipher = True):
 
 def brute_force_cesar_cipher(text):
     for key in range(1, 1_114_112):
-        potential_plaintext = cesar_cipher(text, key, cipher=False)
-        print(key)
-        print(potential_plaintext)
-        print("-------------------")
+        potential_initial_text = cesar_cipher(text, key, cipher=False)
+
+        for char in potential_initial_text:
+            if char in string.printable:
+                print(key)
+                print(potential_initial_text)
+                print("-------------------")
+            break
 
         
     return
 
-print(brute_force_cesar_cipher('michel'))
+print(brute_force_cesar_cipher('lhbgdk'))
