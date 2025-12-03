@@ -31,6 +31,15 @@ def brute_force_cesar_cipher(text):
 
 
 
-def vigenere
+def vigenere_cipher(text, password) :
+    list_of_keys = [ord(char) for char in password]
+    crypted_text = ""
+
+    for index, char in enumerate(text):
+        current_key = list_of_keys[index % len(list_of_keys)]
+        crypted_char = cesar_cipher(char, current_key)
+        crypted_text += crypted_char
+        
+    return crypted_text
 
 print(brute_force_cesar_cipher('lhbgdk'))
