@@ -27,4 +27,10 @@ def brute_force_cesar_cipher(text):
         
     return
 
+
+
+
+
+def vigenere
+
 print(brute_force_cesar_cipher('lhbgdk'))
